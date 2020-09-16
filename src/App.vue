@@ -1,29 +1,37 @@
 <template>
   <Container>
     <section class="wrapper">
-      <SearchCity />
+      <input
+        class="a-location__input"
+        type="text"
+        placeholder="İl veya ilçe giriniz"
+        v-model="location"
+      />
       <Info />
-      <Degree/>
+      <div class="a-degree">
+        19° {{location}}
+      </div>
 
-      <WeatherStatus/>
+      <div class="a-weather__status">
+        <CustomText size="xl">Güneşli</CustomText>
+      </div>
     </section>
   </Container>
 </template>
 
 <script>
-import SearchCity from "@/components/SearchCity";
 import Container from "@/components/Container";
 import Info from "@/components/Info";
-import Degree from "@/components/Degree";
-import WeatherStatus from "@/components/WeatherStatus";
 export default {
   name: "App",
   components: {
-    WeatherStatus,
-    Degree,
     Info,
     Container,
-    SearchCity
+  },
+  data() {
+    return {
+      location: ""
+    };
   }
 };
 </script>
@@ -38,5 +46,31 @@ export default {
   background-size: cover;
   height: 100vh;
   color: var(--txt-color-light);
+}
+
+.a-location__input {
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  box-shadow: 2px 3px 20px var(--box-shadow);
+  margin-top: 40px;
+  width: 290px;
+  max-width: 300px;
+  text-align: center;
+  outline: none;
+}
+
+.a-weather__status {
+  font-weight: 600;
+  text-shadow: 3px 8px 9px var(--txt-shadow-color);
+}
+
+.a-degree {
+  font-size: 6rem;
+  font-weight: 300;
+  text-shadow: 3px 8px 9px var(--txt-shadow-color);
+  margin-top: calc(100% - 75%);
 }
 </style>
