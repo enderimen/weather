@@ -37,6 +37,6 @@ export default {
   background-image: url("./assets/chill.png");
   background-size: cover;
   height: 100vh;
-  color: #fff;
+  color: var(--txt-color-light);
 }
 </style>

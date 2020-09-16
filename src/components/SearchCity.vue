@@ -19,9 +19,9 @@ export default {
   height: 40px;
   padding-left: 15px;
   padding-right: 15px;
-  border: 1px solid #cecaca;
+  border: 1px solid var(--border-color);
   border-radius: 15px;
-  box-shadow: 2px 3px 50px #696262;
+  box-shadow: 2px 3px 20px var(--box-shadow);
   margin-top: 40px;
   width: 290px;
   max-width: 300px;

@@ -12,5 +12,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.a-weather__status {
+  font-weight: 600;
+  text-shadow: 3px 8px 9px var(--txt-shadow-color);
+}
 </style>

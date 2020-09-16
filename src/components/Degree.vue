@@ -15,6 +15,7 @@ export default {
 .a-degree {
   font-size: 6rem;
   font-weight: 300;
+  text-shadow: 3px 8px 9px var(--txt-shadow-color);
   margin-top: calc(100% - 75%);
 }
 
