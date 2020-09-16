@@ -1,26 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <Container>
+    <section class="wrapper">
+      <SearchCity />
+      <Info />
+      <Degree/>
+
+      <WeatherStatus/>
+    </section>
+  </Container>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import SearchCity from "@/components/SearchCity";
+import Container from "@/components/Container";
+import Info from "@/components/Info";
+import Degree from "@/components/Degree";
+import WeatherStatus from "@/components/WeatherStatus";
 export default {
   name: "App",
   components: {
-    HelloWorld
+    WeatherStatus,
+    Degree,
+    Info,
+    Container,
+    SearchCity
   }
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-image: url("./assets/chill.png");
+  background-size: cover;
+  height: 100vh;
+  color: #fff;
 }
 </style>
