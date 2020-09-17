@@ -1,4 +1,5 @@
 <template>
+  <MainContent :class="weatherList.length > 0 ? weatherList[0].status : ''">
   <Container>
     <header class="wrapper">
       <input
@@ -9,30 +10,30 @@
         @keypress.enter="fetchWeather"
       />
       <Info :city="city" />
+
       <div class="a-degree">{{ weatherList.length > 0 ? weatherList[0].degree : "" }}°</div>
       <div class="a-weather__status">
         <CustomText :size="'xl'">{{ weatherList.length > 0 ? weatherList[0].description : "" }}</CustomText>
       </div>
     </header>
 
-    <footer class="o-status__list">
-      <OtherDay/>
-      <OtherDay/>
-      <OtherDay/>
-    </footer>
+    <OtherDayList :weatherList="weatherList"/>
   </Container>
+  </MainContent>
 </template>
 
 <script>
 import Container from "@/components/Container";
 import Info from "@/components/Info";
 import CustomText from "@/components/CustomText";
-import OtherDay from "@/components/OtherDay";
+import OtherDayList from "@/components/OtherDay";
+import MainContent from "@/components/MainContent";
 
 export default {
   name: "App",
   components: {
-    OtherDay,
+    MainContent,
+    OtherDayList,
     Info,
     Container,
     CustomText
@@ -43,6 +44,7 @@ export default {
       apiUrl:
         "https://api.collectapi.com/weather/getWeather?data.lang=tr&data.city=",
       location: "İstanbul",
+      weatherStatus: ["Rain", "Snow", "Clear"],
       weatherList: [],
       city: ""
     };
@@ -71,9 +73,11 @@ export default {
     },
     clearAllWeatherField(weatherList) {
       this.weatherList = [];
+      console.log(weatherList)
 
       weatherList.map(weather => {
         this.weatherList.push({
+          day: weather.day,
           degree: parseInt(weather.degree),
           humidity: parseInt(weather.humidity),
           description: weather.description,
@@ -92,6 +96,13 @@ export default {
 </script>
 
 <style lang="scss">
+.main {
+  background-image: url("./assets/chill.png");
+  transition: background .5s;
+  background-size: cover;
+  height: 100vh;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -124,14 +135,5 @@ export default {
   font-weight: 300;
   text-shadow: 3px 8px 9px var(--txt-shadow-color);
   margin-top: calc(100% - 95%);
-}
-
-.o-status__list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: red;
 }
 </style>
