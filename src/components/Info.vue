@@ -1,6 +1,6 @@
 <template>
   <section class="m-info">
-    <CustomText :tag="'h3'" class="m-info__location">İstanbul, Türkiye</CustomText>
+    <CustomText :tag="'h3'" class="m-info__location">{{ city }}</CustomText>
     <CustomText :tag="'p'" class="m-info__date">{{ getFullYear() }}</CustomText>
   </section>
 </template>
@@ -10,6 +10,9 @@ import CustomText from "@/components/CustomText";
 export default {
   name: "Info",
   components: { CustomText },
+  props: {
+    city: String
+  },
   data() {
     return {
       days: [
@@ -71,6 +74,7 @@ export default {
   &__location {
     margin-bottom: 20px;
     font-size: 2rem;
+    text-transform: capitalize;
   }
 
   &__date {
