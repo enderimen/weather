@@ -1,7 +1,7 @@
 <template>
   <section class="m-info">
     <CustomText :tag="'h3'" class="m-info__location">{{ city }}</CustomText>
-    <CustomText :tag="'p'" class="m-info__date">{{ getFullYear() }}</CustomText>
+    <CustomText :tag="'p'" class="m-info__date">{{ getFullDate() }}</CustomText>
   </section>
 </template>
 
@@ -56,7 +56,7 @@ export default {
     }
   },
   methods: {
-    getFullYear() {
+    getFullDate() {
       return `${this.getDate} ${this.getMonth} ${this.getYear} ${this.getDay}`;
     }
   }
