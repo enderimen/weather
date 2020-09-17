@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" :class="size">
+  <component class="a-customText" :is="tag" :class="size">
     <slot/>
   </component>
 </template>
@@ -24,6 +24,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.a-customText {
+  text-transform: capitalize;
+}
 
 .normal {
   font-size: inherit;
