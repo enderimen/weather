@@ -12,11 +12,10 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-  background-image: url("../assets/chill2.png");
-  background-size: cover;
-  height: 100vh;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
