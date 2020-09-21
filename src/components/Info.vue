@@ -1,6 +1,6 @@
 <template>
   <section class="m-info">
-    <CustomText :tag="'h3'" class="m-info__location">{{ city }}</CustomText>
+    <CustomText :tag="'h3'" class="m-info__location">{{ weatherListLength > 0 ? city : "Konum Bulunamadı!" }}</CustomText>
     <CustomText :tag="'p'" class="m-info__date">{{ getFullDate() }}</CustomText>
   </section>
 </template>
@@ -11,18 +11,19 @@ export default {
   name: "Info",
   components: { CustomText },
   props: {
-    city: String
+    city: String,
+    weatherListLength: Number
   },
   data() {
     return {
       days: [
+        "Pazar",
         "Pazartesi",
         "Salı",
         "Çarşamba",
         "Perşembe",
         "Cuma",
-        "Cumartesi",
-        "Pazar"
+        "Cumartesi"
       ],
       months: [
         "Ocak",
@@ -43,7 +44,7 @@ export default {
   },
   computed: {
     getDay() {
-      return this.days[this.date.getDay() - 1];
+      return this.days[this.date.getDay()];
     },
     getMonth() {
       return this.months[this.date.getMonth()];
