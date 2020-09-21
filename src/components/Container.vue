@@ -16,10 +16,5 @@ export default {
   margin-left: auto;
   margin-right: auto;
   height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
 }
 </style>

@@ -1,24 +1,50 @@
 <template>
-  <MainContent :class="weatherList.length > 0 ? weatherList[0].status : ''">
-  <Container>
-    <header class="wrapper">
-      <input
-        class="a-location__input"
-        type="text"
-        placeholder="İl veya ilçe giriniz"
-        v-model="location"
-        @keypress.enter="fetchWeather"
-      />
-      <Info :city="city" />
+  <MainContent>
+    <Container>
+      <div class="v-flex">
+        <!-- search location -->
+        <header class="wrapper">
+          <input
+            class="a-location__input"
+            type="text"
+            placeholder="İl veya ilçe giriniz"
+            v-model="location"
+            @keypress.enter="fetchWeather"
+          />
+        </header>
 
-      <div class="a-degree">{{ weatherList.length > 0 ? weatherList[0].degree : "" }}°</div>
-      <div class="a-weather__status">
-        <CustomText :size="'xl'">{{ weatherList.length > 0 ? weatherList[0].description : "" }}</CustomText>
+        <!-- location weather information -->
+        <main class="o-content">
+          <Info :city="city" :weather-list-length="weatherList.length" />
+
+          <div class="a-degree">
+            {{ `${weatherList.length > 0 ? weatherList[0].degree : "0"}°` }}
+          </div>
+          <div class="a-weather__status">
+            <CustomText :tag="'p'" :size="'xl'">{{
+              weatherList.length > 0 ? weatherList[0].description : ""
+            }}</CustomText>
+            <div class="a-weather__info">
+              <CustomText :size="'small'"
+                >Nem:
+                {{
+                  `${weatherList.length > 0 ? weatherList[0].humidity : "0"}%`
+                }}</CustomText
+              >
+              <CustomText :size="'small'">
+                | Gece:
+                {{
+                  `${weatherList.length > 0 ? weatherList[0].night : "0"}°`
+                }}</CustomText
+              >
+            </div>
+          </div>
+        </main>
+
+        <!-- other day weather information -->
+        <OtherDayList :weatherList="weatherList" />
       </div>
-    </header>
-
-    <OtherDayList :weatherList="weatherList"/>
-  </Container>
+    </Container>
   </MainContent>
 </template>
 
@@ -54,6 +80,7 @@ export default {
   },
   methods: {
     fetchWeather() {
+      this.location = this.location == "" ? "İstanbul" : this.location;
       fetch(this.apiUrl + this.location, {
         method: "GET",
         headers: {
@@ -73,14 +100,14 @@ export default {
     },
     clearAllWeatherField(weatherList) {
       this.weatherList = [];
-      console.log(weatherList)
 
       weatherList.map(weather => {
         this.weatherList.push({
           day: weather.day,
           degree: parseInt(weather.degree),
           humidity: parseInt(weather.humidity),
-          description: weather.description,
+          description:
+            weather.description == "açık" ? "Güneşli" : weather.description,
           max: parseInt(weather.max),
           min: parseInt(weather.min),
           night: parseInt(weather.night),
@@ -88,8 +115,6 @@ export default {
           image: weather.icon
         });
       });
-
-      console.log(this.weatherList);
     }
   }
 };
@@ -98,9 +123,32 @@ export default {
 <style lang="scss">
 .main {
   background-image: url("./assets/chill.png");
-  transition: background .5s;
+  transition: background 0.5s;
   background-size: cover;
+  color: var(--txt-color-light);
   height: 100vh;
+  overflow-y: auto;
+}
+
+.o-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.v-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(100% - 20px);
+}
+
+.h-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .wrapper {
@@ -125,9 +173,16 @@ export default {
   outline: none;
 }
 
-.a-weather__status {
-  font-weight: 600;
-  text-shadow: 3px 8px 9px var(--txt-shadow-color);
+.a-weather {
+  &__status {
+    font-weight: 600;
+    text-shadow: 3px 8px 9px var(--txt-shadow-color);
+    text-align: center;
+  }
+
+  &__info {
+    margin-top: 20px;
+  }
 }
 
 .a-degree {
