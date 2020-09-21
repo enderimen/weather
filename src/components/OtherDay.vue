@@ -5,14 +5,26 @@
       v-for="weather in weatherList"
       :key="weather.day"
     >
-        <CustomText class="o-status__day" :size="'small'">
-          {{ weather.day }}
-        </CustomText>
+      <CustomText class="o-status__day" :size="'small'">
+        {{ weather.day }}
+      </CustomText>
 
-        <div class="o-status__info">
-          <CustomText :size="'small'">{{ weather.degree }}°</CustomText>
-          <CustomText :size="'small'">{{ weather.description }}</CustomText>
-        </div>
+      <img
+        class="o-status__img"
+        :src="weather.image"
+        :alt="weather.status"
+        height="24"
+      />
+
+      <div class="o-status__info">
+        <CustomText :size="'small'"
+          >Sıcaklık: {{ weather.degree }}°
+          <CustomText class="o-status__infoHumidity" :size="'small'"
+            >Nem: {{ weather.humidity }}%
+          </CustomText>
+        </CustomText>
+        <CustomText :size="'small'">{{ weather.description }}</CustomText>
+      </div>
     </div>
   </footer>
 </template>
@@ -29,21 +41,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-
 .o-status {
-
   &__list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(0, 0, 0, 0.2);
+
+    @media (--t) {
+      flex-direction: row;
+    }
   }
 
   &__item {
-    color: var(--txt-color-gray);
+    color: var(--txt-color-light);
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -52,10 +65,42 @@ export default {
 
     &:not(:last-child) {
       border-bottom: 0.5px solid #7a7180;
+
+      @media (--t) {
+        border-bottom: 0;
+        border-right: 0.5px solid #7a7180;
+      }
     }
 
     &:first-child {
       display: none;
+    }
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+
+    @media (--t) {
+      padding: 30px 20px;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__day {
+    @media (--t) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__img {
+    display: none;
+
+    @media (--t) {
+      display: block;
+      height: 24px;
+      width: 24px;
+      margin-bottom: 20px;
     }
   }
 
@@ -63,6 +108,20 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+
+    @media (--t) {
+      align-items: center;
+      align-content: center;
+    }
+
+    &Humidity {
+      display: none;
+
+      @media (--t) {
+        display: inline-flex;
+        margin-bottom: 20px;
+      }
+    }
   }
 }
 </style>
