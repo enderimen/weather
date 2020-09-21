@@ -1,5 +1,5 @@
 <template>
-  <section class="main">
+  <section class="main" :class="status">
     <slot/>
   </section>
 </template>
@@ -18,18 +18,34 @@ export default {
 
 <style scoped>
 .Clear {
-  background-image: url("../assets/sunny.jpg");
+  background-image: url("../assets/sunny-m.jpg");
+
+  @media (--t) {
+    background-image: url("../assets/sunny-d.jpg");
+  }
 }
 
 .Snow {
-  background-image: url("../assets/chill2.png");
+  background-image: url("../assets/chill-m.jpg");
+
+  @media (--t) {
+    background-image: url("../assets/chill-d.jpg");
+  }
 }
 
 .Rain {
-  background-image: url("../assets/sunny3.jpg");
+  background-image: url("../assets/rain.jpg");
+
+  @media (--t) {
+    background-image: url("../assets/rain-d.jpg");
+  }
 }
 
 .Clouds {
-  background-image: url("../assets/chill.png");
+  background-image: url("../assets/cloudly-m.jpg");
+
+  @media (--t) {
+    background-image: url("../assets/cloudly-d.jpg");
+  }
 }
 </style>

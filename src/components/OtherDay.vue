@@ -5,6 +5,7 @@
       v-for="weather in weatherList"
       :key="weather.day"
     >
+      <CustomText class="o-status__date">{{ weather.date }}</CustomText>
       <CustomText class="o-status__day" :size="'small'">
         {{ weather.day }}
       </CustomText>
@@ -87,6 +88,14 @@ export default {
     }
   }
 
+  &__date {
+    display: none;
+
+    @media (--t) {
+      display: inline-flex;
+    }
+  }
+
   &__day {
     @media (--t) {
       margin-bottom: 20px;
@@ -108,6 +117,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    text-align: center;
 
     @media (--t) {
       align-items: center;

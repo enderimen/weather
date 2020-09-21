@@ -1,5 +1,5 @@
 <template>
-  <MainContent>
+  <MainContent :class="weatherList.length > 0 ? weatherList[0].status : ''">
     <Container>
       <div class="v-flex">
         <!-- search location -->
@@ -103,6 +103,7 @@ export default {
 
       weatherList.map(weather => {
         this.weatherList.push({
+          date: weather.date,
           day: weather.day,
           degree: parseInt(weather.degree),
           humidity: parseInt(weather.humidity),
@@ -122,7 +123,12 @@ export default {
 
 <style lang="scss">
 .main {
-  background-image: url("./assets/chill.png");
+  background-image: url("assets/chill-m.jpg");
+
+  @media (--t) {
+    background-image: url("./assets/404.jpg");
+  }
+
   transition: background 0.5s;
   background-size: cover;
   color: var(--txt-color-light);
