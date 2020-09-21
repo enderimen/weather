@@ -18,6 +18,14 @@ export default {
       validator: function(value) {
         return ['normal', 'small', 'xl'].indexOf(value) !== -1
       }
+    },
+    position: {
+      type: String,
+      default: 'Center',
+      required: false,
+      validator: function (value){
+        return ['Left', 'Center', 'Right'].indexOf(value) !== -1
+      }
     }
   }
 }
@@ -37,4 +45,17 @@ export default {
 .xl{
   font-size: 32px;
 }
+
+.Left {
+  text-align: left;
+}
+
+.Center {
+  text-align: center;
+}
+
+.Right {
+  text-align: right;
+}
+
 </style>
