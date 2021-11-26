@@ -87,16 +87,15 @@ export default {
           "Content-Type": "application/json",
           Authorization: this.apiKey
         }
-      })
-        .then(response => {
-          response.json().then(data => {
-            this.city = data.city;
-            this.clearAllWeatherField(data.result);
-          });
-        })
-        .catch(() => {
-          console.log("Bağlantı kurulurken sorun oluştu!");
+      }).then(response => {
+        response.json().then(data => {
+          this.city = data.city;
+          this.clearAllWeatherField(data.result);
         });
+      })
+      .catch(() => {
+        console.log("Bağlantı kurulurken sorun oluştu!");
+      });
     },
     clearAllWeatherField(weatherList) {
       this.weatherList = [];
